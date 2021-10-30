@@ -1,18 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterlogin/firebase_authentication.dart';
+import 'package:flutterlogin/lognUI.dart';
 import 'main.dart';
+import 'lognUI.dart';
+import 'reg_users.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:sticky_footer_scrollview/sticky_footer_scrollview.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SecondRoute extends StatefulWidget {
-  const SecondRoute({Key? key}) : super(key: key);
+// ignore: must_be_immutable
+class SecondRoute extends StatelessWidget {
+  final RegUsers user;
+  const SecondRoute({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
-  @override
-  _SecondRouteState createState() => _SecondRouteState();
-}
-
-class _SecondRouteState extends State<SecondRoute> {
   @override
   Widget build(BuildContext context) {
+    //RegUsers user = context.read<Authentication>().currentUser;
     return MaterialApp(
       home: Container(
         decoration: BoxDecoration(
@@ -54,11 +62,11 @@ class _SecondRouteState extends State<SecondRoute> {
                       ),
                       style: ButtonStyle(),
                       onPressed: () {
-                        Navigator.push(
+                        /* Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SecondRoute()),
-                        );
+                              builder: (context) => SecondRoute(user: null,)),
+                        );*/
                       }),
                   SizedBox(
                     width: 10,
@@ -71,11 +79,11 @@ class _SecondRouteState extends State<SecondRoute> {
                         ),
                         style: ButtonStyle(),
                         onPressed: () {
-                          Navigator.push(
+                          /*Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SecondRoute()),
-                          );
+                          );*/
                         }),
                   ]),
                   SizedBox(
@@ -89,11 +97,11 @@ class _SecondRouteState extends State<SecondRoute> {
                         ),
                         style: ButtonStyle(),
                         onPressed: () {
-                          Navigator.push(
+                          /*Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SecondRoute()),
-                          );
+                          );*/
                         }),
                   ]),
                   SizedBox(
@@ -107,11 +115,11 @@ class _SecondRouteState extends State<SecondRoute> {
                         ),
                         style: ButtonStyle(),
                         onPressed: () {
-                          Navigator.push(
+                          /*Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SecondRoute()),
-                          );
+                          );*/
                         }),
                     SizedBox(
                       width: 30,
@@ -131,22 +139,40 @@ class _SecondRouteState extends State<SecondRoute> {
                   ),
                   child: Column(
                     children: [
-                      Container(
-                        child: SizedBox(
-                          width: 100,
-                          child: Image.asset(
-                            'assets/images/profile.png',
-                          ),
-                        ),
+                      CircleAvatar(
+                        radius: 35,
+                        child: ClipOval(
+                            child: Image.network(
+                          user.photoUrl,
+                          errorBuilder: (BuildContext context, Object exception,
+                              StackTrace? stackTrace) {
+                            return Image(
+                              filterQuality: FilterQuality.high,
+                              image: AssetImage("google.png"),
+                            );
+                          },
+                          width: 50,
+                          height: 50,
+                          filterQuality: FilterQuality.high,
+                          fit: BoxFit.fitWidth,
+                        )),
                       ),
                       Column(
                         children: [
                           Padding(
                             padding: EdgeInsets.only(top: 20),
-                            child: Text("User:12309898123"),
+                            child: Text(user.displayname),
                           ),
                         ],
                       ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 5),
+                            child: Text(user.email),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -197,9 +223,12 @@ class _SecondRouteState extends State<SecondRoute> {
                     'Log Out',
                     style: TextStyle(color: Colors.red),
                   ),
-                  onTap: () {
-                    // Update the state of the app.
-                    // ...
+                  onTap: () async {
+                    await Authentication().logOut(context).whenComplete(() {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => LoginView()),
+                          (route) => false);
+                    });
                   },
                 ),
               ],

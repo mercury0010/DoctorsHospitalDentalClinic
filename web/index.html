@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -17,6 +18,8 @@
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
 
+
+
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -25,8 +28,30 @@
 
   <title>flutterlogin</title>
   <link rel="manifest" href="manifest.json">
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+  <meta name="google-signin-client_id"
+    content="696113623096-tibd4atv3u9rhsbdj3d9k2k7kf46hkdm.apps.googleusercontent.com">
 </head>
+
 <body>
+  <script>
+    // Your web app's Firebase configuration
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDq9-SVyqL72WD0ujEjJef4YF7FBUwSGPw",
+      authDomain: "doctorshospitaldentalclinic.firebaseapp.com",
+      projectId: "doctorshospitaldentalclinic",
+      storageBucket: "doctorshospitaldentalclinic.appspot.com",
+      messagingSenderId: "696113623096",
+      appId: "1:696113623096:web:e316d64019cf731a4f36cd"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+  </script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
@@ -95,4 +120,5 @@
     }
   </script>
 </body>
+
 </html>

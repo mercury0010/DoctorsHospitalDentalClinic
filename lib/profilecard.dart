@@ -52,15 +52,19 @@ class ProfileCard extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              Text(user.docName),
+              Text(
+                user.docName,
+                textAlign: TextAlign.left,
+              ),
               const SizedBox(
                 height: 5,
               ),
-              Text("Email: " + user.email),
+              Text("Email: " + user.email, textAlign: TextAlign.left),
               const SizedBox(
                 height: 5,
               ),
-              Text("Patients Served: " + user.patients),
+              Text("Patients Served: " + user.patients,
+                  textAlign: TextAlign.left),
             ],
           ),
         ),

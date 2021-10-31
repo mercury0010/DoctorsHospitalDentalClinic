@@ -57,83 +57,10 @@ class SecondRoute extends StatelessWidget {
                   )
                 ],
               ),
-              actions: [
-                Row(children: [
-                  TextButton(
-                      child: Text(
-                        "Home",
-                        style: TextStyle(fontSize: 14, color: Colors.white),
-                      ),
-                      style: ButtonStyle(),
-                      onPressed: () {
-                        /* Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SecondRoute(user: null,)),
-                        );*/
-                      }),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Row(children: [
-                    TextButton(
-                        child: Text(
-                          "About US",
-                          style: TextStyle(fontSize: 14, color: Colors.white),
-                        ),
-                        style: ButtonStyle(),
-                        onPressed: () {
-                          /*Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SecondRoute()),
-                          );*/
-                        }),
-                  ]),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Row(children: [
-                    TextButton(
-                        child: Text(
-                          "Facilities",
-                          style: TextStyle(fontSize: 14, color: Colors.white),
-                        ),
-                        style: ButtonStyle(),
-                        onPressed: () {
-                          /*Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SecondRoute()),
-                          );*/
-                        }),
-                  ]),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Row(children: [
-                    TextButton(
-                        child: Text(
-                          "News and Promos",
-                          style: TextStyle(fontSize: 14, color: Colors.white),
-                        ),
-                        style: ButtonStyle(),
-                        onPressed: () {
-                          /*Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SecondRoute()),
-                          );*/
-                        }),
-                    SizedBox(
-                      width: 30,
-                    ),
-                  ]),
-                ])
-              ],
+              actions: [],
             ),
           ),
-          drawer: Drawer(
+          endDrawer: Drawer(
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
@@ -267,7 +194,7 @@ class SecondRoute extends StatelessWidget {
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Image.network(
-                                            "assets/images/ADS2.png",
+                                            "assets/images/car/ADS2.png",
                                           );
                                         },
                                         itemCount: 3,

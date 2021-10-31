@@ -183,16 +183,17 @@ class LoginViewState extends StatelessWidget {
                                 )
                               ],
                             ),
-                            Container(
-                              child: isLoading
-                                  ? _loadingIndicator()
-                                  : loginButton(context),
-                            ),
-                            loginButton(context),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SizedBox(width: 30),
+                                  Row(
+                                    children: [
+                                      isLoading
+                                          ? _loadingIndicator()
+                                          : loginButton(context),
+                                    ],
+                                  ),
+                                  SizedBox(width: 10),
                                   TextButton(
                                       child: Text(
                                         "Login Anonymously",
@@ -296,7 +297,7 @@ Widget loginButton(BuildContext context) {
       context.read<Authentication>().loginWithGoogle();
     },
     child: Text(
-      "Sign In With Google",
+      "    Sign In With Google   ",
       style: TextStyle(fontSize: 14, color: Colors.white),
     ),
     style: ButtonStyle(

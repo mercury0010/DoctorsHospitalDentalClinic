@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'doctors.dart';
 import 'reg_users.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
 
 class Authentication {
@@ -13,9 +18,11 @@ class Authentication {
   final CollectionReference regUsers =
       FirebaseFirestore.instance.collection("regusers");
 
-  Authentication(
-      {FirebaseAuth? auth, GoogleSignIn? googleSignIn, RegUsers? loginUser})
-      : _auth = auth ?? FirebaseAuth.instance,
+  Authentication({
+    FirebaseAuth? auth,
+    GoogleSignIn? googleSignIn,
+    RegUsers? loginUser,
+  })  : _auth = auth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn(),
         currentUser = loginUser ?? RegUsers();
 
@@ -35,6 +42,24 @@ class Authentication {
     }).handleError((error) {
       return RegUsers();
     });
+  }
+
+  Stream<List<Doctors>> getUser2() {
+    return FirebaseFirestore.instance
+        .collection("doctors")
+        .snapshots()
+        .map(snap);
+  }
+
+  List<Doctors> snap(QuerySnapshot snapshots) {
+    return snapshots.docs.map((doc) {
+      return Doctors(
+          uid: doc.id,
+          patients: doc.get('Patients'),
+          docName: doc.get('docName'),
+          email: doc.get('email'),
+          photoUrl: doc.get('photo'));
+    }).toList();
   }
 
   RegUsers getCurrentUser(BuildContext context) {
@@ -90,7 +115,11 @@ class Authentication {
     }
   }
 
-  Future<void> logOut(BuildContext context) async {
+  Future<void> signOut() async {
+    return _auth.signOut();
+  }
+
+  Future<void> logOut(BuildContext dcontext) async {
     await _googleSignIn.signOut();
     await _auth.signOut();
   }

@@ -2,8 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterlogin/firebase_authentication.dart';
 import 'package:flutterlogin/lognUI.dart';
+import 'profilecard.dart';
+import 'doctors.dart';
 import 'main.dart';
 import 'lognUI.dart';
+import 'firebase_authentication.dart';
 import 'reg_users.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:sticky_footer_scrollview/sticky_footer_scrollview.dart';
@@ -13,6 +16,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // ignore: must_be_immutable
 class SecondRoute extends StatelessWidget {
   final RegUsers user;
+
   const SecondRoute({
     Key? key,
     required this.user,
@@ -224,11 +228,14 @@ class SecondRoute extends StatelessWidget {
                     style: TextStyle(color: Colors.red),
                   ),
                   onTap: () async {
-                    await Authentication().logOut(context).whenComplete(() {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => LoginView()),
-                          (route) => false);
-                    });
+                    await Authentication().logOut(context).whenComplete(
+                      () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => LoginView()),
+                            (route) => false);
+                      },
+                    );
                   },
                 ),
               ],
@@ -463,19 +470,53 @@ class SecondRoute extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    SizedBox(
-                                      height: 30,
-                                    )
+                                    Divider(
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      "Available Doctors",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontSize: 50),
+                                    ),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     SizedBox(
-                                      height: 480,
-                                      width: 1142,
-                                      child: Card(
-                                        child: Image.asset(
-                                            "assets/images/ADS2.png"),
+                                      height: 30,
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      height: 400,
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.vertical,
+                                        padding: const EdgeInsets.all(5.0),
+                                        child:
+                                            StreamProvider<List<Doctors>>.value(
+                                          value: Authentication().getUser2(),
+                                          builder: (context, snapshot) {
+                                            List<Doctors> users =
+                                                Provider.of<List<Doctors>>(
+                                                    context);
+                                            return Wrap(
+                                              alignment: WrapAlignment.center,
+                                              direction: Axis.horizontal,
+                                              children: users.map((user) {
+                                                return ProfileCard(
+                                                  user: user,
+                                                );
+                                              }).toList(),
+                                            );
+                                          },
+                                          initialData: [],
+                                        ),
                                       ),
                                     )
                                   ],

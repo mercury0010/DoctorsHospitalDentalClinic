@@ -194,7 +194,7 @@ class SecondRoute extends StatelessWidget {
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Image.network(
-                                            "assets/images/ADS1.png",
+                                            "assets/images/slider2.png",
                                           );
                                         },
                                         itemCount: 3,

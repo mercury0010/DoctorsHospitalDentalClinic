@@ -190,18 +190,11 @@ class SecondRoute extends StatelessWidget {
                                     SizedBox(
                                       height: 480,
                                       width: 1142,
-                                      child: Swiper(
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return Image.network(
-                                            "assets/images/slider2.png",
-                                          );
-                                        },
-                                        itemCount: 3,
-                                        pagination: SwiperPagination(),
-                                        control: SwiperControl(),
+                                      child: Card(
+                                        child: Image.asset(
+                                            "assets/images/ADS2.png"),
                                       ),
-                                    ),
+                                    )
                                   ],
                                 ),
                                 Column(

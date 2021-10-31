@@ -58,7 +58,9 @@ class Authentication {
           patients: doc.get('Patients'),
           docName: doc.get('docName'),
           email: doc.get('email'),
-          photoUrl: doc.get('photo'));
+          photoUrl: doc.get('photo'),
+          avail: doc.get('avail'),
+          field: doc.get('field'));
     }).toList();
   }
 

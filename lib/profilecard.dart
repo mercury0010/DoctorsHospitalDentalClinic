@@ -4,6 +4,7 @@ import 'package:flutterlogin/doctors.dart';
 import 'package:flutterlogin/firebase_authentication.dart';
 import 'package:flutterlogin/lognUI.dart';
 import 'main.dart';
+import 'doctorprofile.dart';
 import 'lognUI.dart';
 import 'firebase_authentication.dart';
 import 'reg_users.dart';
@@ -65,6 +66,31 @@ class ProfileCard extends StatelessWidget {
               ),
               Text("Patients Served: " + user.patients,
                   textAlign: TextAlign.left),
+              TextButton(
+                  child: Text(
+                    "Set Appointment",
+                    style: TextStyle(fontSize: 10, color: Colors.white),
+                  ),
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                        EdgeInsets.all(10)),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        side: BorderSide(color: Colors.green),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DocProf(user)),
+                    );
+                  }),
             ],
           ),
         ),

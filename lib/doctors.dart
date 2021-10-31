@@ -4,6 +4,8 @@ class Doctors {
   String email;
   String photoUrl;
   String patients;
+  String field;
+  String avail;
 
   Doctors({
     this.uid = "",
@@ -11,5 +13,7 @@ class Doctors {
     this.email = "",
     this.photoUrl = "",
     this.patients = "",
+    this.field = "",
+    this.avail = "",
   });
 }
